@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+
+from decouple import config
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -96,24 +98,17 @@ WSGI_APPLICATION = 'splitExpense.wsgi.application'
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
 # }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'verceldb',
-        'USER': 'default',
-        'PASSWORD': 'lJVYN5wh0tpF',
-        'HOST': 'ep-solitary-hall-a4ru8fqc-pooler.us-east-1.aws.neon.tech',  
-        'PORT': '5432',      
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
-# POSTGRES_URL="postgres://default:lJVYN5wh0tpF@ep-solitary-hall-a4ru8fqc-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
-# POSTGRES_PRISMA_URL="postgres://default:lJVYN5wh0tpF@ep-solitary-hall-a4ru8fqc-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15"
-# POSTGRES_URL_NO_SSL="postgres://default:lJVYN5wh0tpF@ep-solitary-hall-a4ru8fqc-pooler.us-east-1.aws.neon.tech:5432/verceldb"
-# POSTGRES_URL_NON_POOLING="postgres://default:lJVYN5wh0tpF@ep-solitary-hall-a4ru8fqc.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
-# POSTGRES_USER="default"
-# POSTGRES_HOST="ep-solitary-hall-a4ru8fqc-pooler.us-east-1.aws.neon.tech"
-# POSTGRES_PASSWORD="lJVYN5wh0tpF"
-# POSTGRES_DATABASE="verceldb"
 
 
 # Password validation
